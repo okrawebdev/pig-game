@@ -83,5 +83,9 @@ function newGame(){
 
 // hold function
 function hold(){
-	alert('Hold', roundScore);
+	console.log('Hold: ' + roundScore);
+	// add current score to global score
+	scores[activePlayer] = roundScore;
+	// toggle player from 0 to 1 or vice versa
+	activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
 }
