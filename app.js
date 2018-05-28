@@ -28,6 +28,13 @@ document.getElementById('current-1').textContent = '0';
 // Add click event listener to roll dice button (btn-roll)
 document.querySelector('.btn-roll').addEventListener('click', rollDice);
 
+// Add click event listener to new game button
+document.querySelector('.btn-new').addEventListener('click', newGame);
+
+// Add click event listener to hold button
+document.querySelector('.btn-hold').addEventListener('click', hold);
+
+
 // rollDice function
 function rollDice(){
 	// output to console for now
@@ -61,6 +68,20 @@ function rollDice(){
 		document.querySelector('.player-0-panel').classList.toggle('active');
 		document.querySelector('.player-1-panel').classList.toggle('active');
 		
+	
+		// hide dice until next plaer clicks roll dice
+		document.querySelector('.dice').style.display = 'none';
+		
 	}
 	
+}
+
+// newGame function
+function newGame(){
+	alert('New Game');
+}
+
+// hold function
+function hold(){
+	alert('Hold', roundScore);
 }
