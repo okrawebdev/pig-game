@@ -50,8 +50,16 @@ function rollDice(){
 		
 	} else {
 		// next player
+		// reset roundScore and display reset current score
 		roundScore = 0;
-		console.log('dice:', dice, ' Next player', 'roundScore', roundScore);
+		document.querySelector('#current-'+activePlayer).textContent = roundScore;
+		// toggle activePlayer to chose next player
+		activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+		// console.log('dice:', dice, ' Next player', 'roundScore', roundScore, 'activePlayer', activePlayer);
+		
+		// toggle css class to highlight active player
+		document.querySelector('.player-0-panel').classList.toggle('active');
+		document.querySelector('.player-1-panel').classList.toggle('active');
 		
 	}
 	
