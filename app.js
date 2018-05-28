@@ -56,21 +56,10 @@ function rollDice(){
 		document.querySelector('#current-'+activePlayer).textContent = roundScore;
 		
 	} else {
-		// next player
 		// reset roundScore and display reset current score
 		roundScore = 0;
-		document.querySelector('#current-'+activePlayer).textContent = roundScore;
-		// toggle activePlayer to chose next player
-		activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-		// console.log('dice:', dice, ' Next player', 'roundScore', roundScore, 'activePlayer', activePlayer);
-		
-		// toggle css class to highlight active player
-		document.querySelector('.player-0-panel').classList.toggle('active');
-		document.querySelector('.player-1-panel').classList.toggle('active');
-		
-	
-		// hide dice until next plaer clicks roll dice
-		document.querySelector('.dice').style.display = 'none';
+		nextPlayer();
+		hideDice();
 		
 	}
 	
@@ -78,14 +67,55 @@ function rollDice(){
 
 // newGame function
 function newGame(){
-	alert('New Game');
+	console.log('New Game');
+	/* 
+	- reset current score & score array
+	- diplay new scores
+	- hide dice
+	*/
+	scores = [0,0];
+	document.querySelector('#score-0').textContent = scores[0];
+	document.querySelector('#score-1').textContent = scores[1];
+	hideDice();
+	
 }
 
 // hold function
 function hold(){
-	console.log('Hold: ' + roundScore);
-	// add current score to global score
-	scores[activePlayer] = roundScore;
+
 	// toggle player from 0 to 1 or vice versa
+	nextPlayer();
+	console.log('Hold: ' + roundScore, activePlayer);
+	
+}
+/* function nextPlayer
+	- reset roundScore
+	- display current activePlayer roundScore
+	- toggle players 0 to 1 or 1 to 0
+	- add roundScore to scores
+	- display scores
+	
+*/
+function nextPlayer() {
+	// add current score to global score
+	scores[activePlayer] += roundScore;
+	// after adding current score to global score, reset roundScore
+	roundScore = 0;
+	// Display scores
+	document.querySelector('#score-'+activePlayer).textContent = scores[activePlayer];
+	document.querySelector('#current-'+activePlayer).textContent = roundScore;
+	// toggle activePlayer to chose next player
 	activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+	// console.log('dice:', dice, ' Next player', 'roundScore', roundScore, 'activePlayer', activePlayer);
+
+	// toggle css class to highlight active player
+	document.querySelector('.player-0-panel').classList.toggle('active');
+	document.querySelector('.player-1-panel').classList.toggle('active');
+	hideDice();
+
+}
+
+function hideDice(){
+	// hide dice until next plaer clicks roll dice
+	document.querySelector('.dice').style.display = 'none';
 }
