@@ -82,10 +82,20 @@ function newGame(){
 
 // hold function
 function hold(){
-
+	/* Check for winner
+	- is activePlayer score > 100 then 
+	- display winner, stop roll dice and hold buttons
+	- else next player
+	
+	*/
+	if(scores[activePlayer] >100) {
+		displayWinner();
+		// 
+	} else {	
 	// toggle player from 0 to 1 or vice versa
-	nextPlayer();
-	console.log('Hold: ' + roundScore, activePlayer);
+		nextPlayer();
+	// console.log('Hold: ' + roundScore, activePlayer);
+	}
 	
 }
 /* function nextPlayer
@@ -116,6 +126,9 @@ function nextPlayer() {
 }
 
 function hideDice(){
-	// hide dice until next plaer clicks roll dice
+	// hide dice until next player clicks roll dice
 	document.querySelector('.dice').style.display = 'none';
+}
+function dislplayWinner(){
+	console.log("Winner is Payer "+activePlayer);
 }
