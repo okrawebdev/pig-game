@@ -142,16 +142,25 @@ function myDebug(prefix){
 	
 }
 function init(){
-	// Assign values to variables
+	// Initialise/Reset variables
 	scores = [0,0];
 	roundScore = 0;
 	activePlayer = 0;
+	
 	// Hide dice image
 	document.querySelector('.dice').style.display = 'none';
+	
 	// set current scores and roundscores to 0
 	document.getElementById('score-0').textContent = scores[0];
 	document.getElementById('score-1').textContent = scores[1];
 	document.getElementById('current-0').textContent = '0';
 	document.getElementById('current-1').textContent = '0';	
-
+	
+	// Reset player names
+	document.getElementById('name-0').textContent = 'Player 1';
+	document.getElementById('name-1').textContent = 'Player 2';
+	
+	// Remove winner from player panel
+	document.querySelector('.player-0-panel').classList.remove('winner');
+	document.querySelector('.player-1-panel').classList.remove('winner');
 }
