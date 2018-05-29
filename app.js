@@ -83,20 +83,23 @@ function newGame(){
 // hold function
 function hold(){
 	/* Check for winner
-	- is activePlayer score > 100 then 
-	- display winner, stop roll dice and hold buttons
-	- else next player
-	
+	- is activePlayer score > winning score 
 	*/
-	if(scores[activePlayer] >100) {
+	var winScore = 20;
+	// console.log('Entry - Active Player: ',activePlayer, scores[activePlayer],scores[activePlayer] > 19);
+	myDebug('Entry-');
+	if(scores[activePlayer] >= 19) {
+		// display winner, stop roll dice and hold buttons
 		displayWinner();
-		// 
-	} else {	
-	// toggle player from 0 to 1 or vice versa
+		disablePlay();
+		hideDice()
+		
+	} else {
+		// Next player: toggle player from 0 to 1 or vice versa
 		nextPlayer();
-	// console.log('Hold: ' + roundScore, activePlayer);
+		// console.log('Hold: ' + roundScore, activePlayer);
 	}
-	
+	myDebug('Exit-');
 }
 /* function nextPlayer
 	- reset roundScore
@@ -112,8 +115,8 @@ function nextPlayer() {
 	// after adding current score to global score, reset roundScore
 	roundScore = 0;
 	// Display scores
-	document.querySelector('#score-'+activePlayer).textContent = scores[activePlayer];
-	document.querySelector('#current-'+activePlayer).textContent = roundScore;
+	document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+	document.querySelector('#current-' + activePlayer).textContent = roundScore;
 	// toggle activePlayer to chose next player
 	activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
 	// console.log('dice:', dice, ' Next player', 'roundScore', roundScore, 'activePlayer', activePlayer);
@@ -129,6 +132,26 @@ function hideDice(){
 	// hide dice until next player clicks roll dice
 	document.querySelector('.dice').style.display = 'none';
 }
-function dislplayWinner(){
-	console.log("Winner is Payer "+activePlayer);
+function displayWinner(){
+	console.log("Winner is Player " + parseInt(activePlayer+1));
+	document.querySelector('#name-' + activePlayer).textContent = 'Winner';
+	document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+	document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+}
+
+function disablePlay(){
+	console.log('Play disabled');
+	// Remove click event listener to roll dice button (btn-roll)
+	document.querySelector('.btn-roll').removeEventListener('click', rollDice);
+	// Remove click event listener to hold button
+	document.querySelector('.btn-hold').removeEventListener('click', hold);
+}
+
+function myDebug(prefix){
+	console.log(prefix + 'Active Player: ',activePlayer);
+	console.log(prefix + 'score[0]: ',scores[0]);
+	console.log(prefix + 'score[1]: ',scores[1]);
+	console.log(prefix + 'is scores[activelayer]> 19', scores[activePlayer] >= 20);
+	console.log('---------------------------------------------')
+	
 }
