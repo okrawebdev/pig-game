@@ -11,19 +11,7 @@ GAME RULES:
 // Declare variables
 var scores, roundScore, activePlayer;
 
-// Assign values to variables
-scores = [0,0];
-roundScore = 0;
-activePlayer = 0;
-
-
-// Hide dice image
-document.querySelector('.dice').style.display = 'none';
-// set current scores and roundscores to 0
-document.getElementById('score-0').textContent = '0';
-document.getElementById('score-1').textContent = '0';
-document.getElementById('current-0').textContent = '0';
-document.getElementById('current-1').textContent = '0';
+init();
 
 // Add click event listener to roll dice button (btn-roll)
 document.querySelector('.btn-roll').addEventListener('click', rollDice);
@@ -73,9 +61,7 @@ function newGame(){
 	- diplay new scores
 	- hide dice
 	*/
-	scores = [0,0];
-	document.querySelector('#score-0').textContent = scores[0];
-	document.querySelector('#score-1').textContent = scores[1];
+	init();
 	hideDice();
 	
 }
@@ -154,4 +140,18 @@ function myDebug(prefix){
 	console.log(prefix + 'is scores[activelayer]> 19', scores[activePlayer] >= 20);
 	console.log('---------------------------------------------')
 	
+}
+function init(){
+	// Assign values to variables
+	scores = [0,0];
+	roundScore = 0;
+	activePlayer = 0;
+	// Hide dice image
+	document.querySelector('.dice').style.display = 'none';
+	// set current scores and roundscores to 0
+	document.getElementById('score-0').textContent = scores[0];
+	document.getElementById('score-1').textContent = scores[1];
+	document.getElementById('current-0').textContent = '0';
+	document.getElementById('current-1').textContent = '0';	
+
 }
