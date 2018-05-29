@@ -13,14 +13,10 @@ var scores, roundScore, activePlayer;
 
 init();
 
-// Add click event listener to roll dice button (btn-roll)
-document.querySelector('.btn-roll').addEventListener('click', rollDice);
-
 // Add click event listener to new game button
-document.querySelector('.btn-new').addEventListener('click', newGame);
+// New Game btn is ALWAYS available to reset game.
 
-// Add click event listener to hold button
-document.querySelector('.btn-hold').addEventListener('click', hold);
+document.querySelector('.btn-new').addEventListener('click', newGame);
 
 
 // rollDice function
@@ -39,9 +35,14 @@ function rollDice(){
 	// update roundScore if dice greater than 1
 	// else reset current score and go other player
 	if (dice> 1){
+		// add rolled dice to roundScore
 		roundScore += dice;
+		// add current score to global score
+		scores[activePlayer] += roundScore;
 		// append activePlayer value to "current-" to get ID for selection
 		document.querySelector('#current-'+activePlayer).textContent = roundScore;
+		// after adding current score to global score, reset roundScore
+		roundScore = 0;
 		
 	} else {
 		// reset roundScore and display reset current score
@@ -96,10 +97,7 @@ function hold(){
 	
 */
 function nextPlayer() {
-	// add current score to global score
-	scores[activePlayer] += roundScore;
-	// after adding current score to global score, reset roundScore
-	roundScore = 0;
+
 	// Display scores
 	document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 	document.querySelector('#current-' + activePlayer).textContent = roundScore;
@@ -131,6 +129,7 @@ function disablePlay(){
 	document.querySelector('.btn-roll').removeEventListener('click', rollDice);
 	// Remove click event listener to hold button
 	document.querySelector('.btn-hold').removeEventListener('click', hold);
+	
 }
 
 function myDebug(prefix){
@@ -163,4 +162,11 @@ function init(){
 	// Remove winner from player panel
 	document.querySelector('.player-0-panel').classList.remove('winner');
 	document.querySelector('.player-1-panel').classList.remove('winner');
+	
+	// Add Event Listeners
+	// Add click event listener to roll dice button (btn-roll)
+	document.querySelector('.btn-roll').addEventListener('click', rollDice);
+
+	// Add click event listener to hold button
+	document.querySelector('.btn-hold').addEventListener('click', hold);
 }
